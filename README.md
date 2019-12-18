@@ -1,4 +1,4 @@
-# js-trees
+# js-graphs
 
 [![Build Status](https://travis-ci.org/hexlet-components/js-graphs.svg?branch=master)](https://travis-ci.org/hexlet-components/js-graphs)
 
