@@ -2,11 +2,11 @@
 
 import _ from 'lodash';
 
-export const makeGraph = (tree, parent, leafs = {}) => {
+export const makeGraph = (tree, parent) => {
   const [leaf, children] = tree;
 
   if (!children) {
-    return { ...leafs, [leaf]: [parent] };
+    return { [leaf]: [parent] };
   }
 
   const flatChildren = _.flatten(children);
@@ -14,7 +14,6 @@ export const makeGraph = (tree, parent, leafs = {}) => {
     .filter((n) => n && !_.isArray(n));
 
   return {
-    ...leafs,
     [leaf]: neighbors,
     ...children.reduce((acc, c) => ({ ...acc, ...makeGraph(c, leaf) }), {}),
   };
