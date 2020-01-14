@@ -1,6 +1,6 @@
 # js-graphs
 
-[![Build Status](https://travis-ci.org/hexlet-components/js-graphs.svg?branch=master)](https://travis-ci.org/hexlet-components/js-graphs)
+[![github action status](https://github.com/hexlet-components/js-graphs/workflows/Main%20workflow/badge.svg)](https://github.com/hexlet-components/js-graphs/actions)
 
 ## Install
 
