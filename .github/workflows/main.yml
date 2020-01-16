@@ -28,3 +28,20 @@ jobs:
           node-version: 12.x
       - run: make install
       - run: make lint
+
+  publish:
+    needs: [test]
+    name: publish to npm
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
+        with:
+          node-version: 12.x
+      - run: make install
+      - id: check
+        uses: EndBug/version-check@v1.1.0
+      - if: steps.check.outputs.changed == 'true'
+        run: |
+          npm config set //registry.npmjs.org/:_authToken ${{ secrets.npmjs_com }}
+          make publish
