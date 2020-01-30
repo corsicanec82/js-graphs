@@ -1,8 +1,8 @@
 import {
-  makeGraph, buildTreeFromLeaf, sortGraph, sortTree,
+  makeJoints, buildTreeFromLeaf, sortJoints, sortTree,
 } from '../src';
 
-describe('Graphs', () => {
+describe('Joints', () => {
   const tree = ['A', [
     ['C', [
       ['F', [
@@ -27,9 +27,9 @@ describe('Graphs', () => {
     ]],
   ]];
 
-  let graph;
+  let joints;
 
-  it('#makeGraph', () => {
+  it('#makeJoints', () => {
     const expected = {
       A: ['C', 'B'],
       C: ['F', 'G', 'A'],
@@ -47,8 +47,8 @@ describe('Graphs', () => {
       D: ['H', 'B'],
       H: ['D'],
     };
-    graph = makeGraph(tree);
-    expect(graph).toEqual(expected);
+    joints = makeJoints(tree);
+    expect(joints).toEqual(expected);
   });
 
   it('#buildTreeFromLeaf', () => {
@@ -76,11 +76,11 @@ describe('Graphs', () => {
       ]],
     ]];
 
-    const actual = buildTreeFromLeaf(graph, 'F');
+    const actual = buildTreeFromLeaf(joints, 'F');
     expect(actual).toEqual(expected);
   });
 
-  it('#sortGraph', () => {
+  it('#sortJoints', () => {
     const expected = {
       A: ['B', 'C'],
       C: ['A', 'F', 'G'],
@@ -98,7 +98,7 @@ describe('Graphs', () => {
       D: ['B', 'H'],
       H: ['D'],
     };
-    const actual = sortGraph(graph);
+    const actual = sortJoints(joints);
     expect(actual).toEqual(expected);
   });
 

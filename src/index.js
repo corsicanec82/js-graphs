@@ -2,7 +2,7 @@
 
 import _ from 'lodash';
 
-export const makeGraph = (tree, parent) => {
+export const makeJoints = (tree, parent) => {
   const [leaf, children] = tree;
 
   if (!children) {
@@ -15,14 +15,14 @@ export const makeGraph = (tree, parent) => {
 
   return {
     [leaf]: neighbors,
-    ...children.reduce((acc, c) => ({ ...acc, ...makeGraph(c, leaf) }), {}),
+    ...children.reduce((acc, c) => ({ ...acc, ...makeJoints(c, leaf) }), {}),
   };
 };
 
-export const buildTreeFromLeaf = (graph, leaf) => {
+export const buildTreeFromLeaf = (joints, leaf) => {
   const iter = (current, acc) => {
     const checked = [...acc, current];
-    const neighbors = graph[current]
+    const neighbors = joints[current]
       .filter((n) => !checked.includes(n))
       .map((n) => iter(n, checked));
     return _.isEmpty(neighbors) ? [current] : [current, neighbors];
@@ -31,15 +31,15 @@ export const buildTreeFromLeaf = (graph, leaf) => {
   return iter(leaf, []);
 };
 
-export const sortGraph = (graph) => {
+export const sortJoints = (joints) => {
   const sortLeaf = (acc, neighbors, leaf) => ({ ...acc, [leaf]: _.sortBy(neighbors) });
-  return _.reduce(graph, sortLeaf, {});
+  return _.reduce(joints, sortLeaf, {});
 };
 
 export const sortTree = (tree) => {
   const [root] = tree;
-  const graph = makeGraph(tree);
-  const sortedGraph = sortGraph(graph);
+  const joints = makeJoints(tree);
+  const sortedJoints = sortJoints(joints);
 
-  return buildTreeFromLeaf(sortedGraph, root);
+  return buildTreeFromLeaf(sortedJoints, root);
 };
