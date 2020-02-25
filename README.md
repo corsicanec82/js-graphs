@@ -1,6 +1,6 @@
 # js-graphs
 
-[![github action status](https://github.com/hexlet-components/js-graphs/workflows/Main%20workflow/badge.svg)](https://github.com/hexlet-components/js-graphs/actions)
+[![github action status](https://github.com/hexlet-components/js-graphs/workflows/Node%20CI/badge.svg)](https://github.com/hexlet-components/js-graphs/actions)
 
 ## Install
 
