@@ -130,4 +130,35 @@ describe('Joints', () => {
     const actual = sortTree(tree);
     expect(actual).toEqual(expected);
   });
+
+  it('#sortTree with duplicate leafs', () => {
+    const treeWithDuplicateLeafs = ['B', [
+      ['D'],
+      ['A', [
+        ['C', [
+          ['F'],
+          ['E'],
+        ]],
+        ['B', [
+          ['D'],
+        ]],
+      ]],
+    ]];
+
+    const expected = ['B', [
+      ['A', [
+        ['B', [
+          ['D'],
+        ]],
+        ['C', [
+          ['E'],
+          ['F'],
+        ]],
+      ]],
+      ['D'],
+    ]];
+
+    const actual = sortTree(treeWithDuplicateLeafs);
+    expect(actual).toEqual(expected);
+  });
 });

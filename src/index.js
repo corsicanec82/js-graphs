@@ -36,10 +36,28 @@ export const sortJoints = (joints) => {
   return _.reduce(joints, sortLeaf, {});
 };
 
+const map = (callbackFn, tree) => {
+  const [leaf, children] = tree;
+  const updatedLeaf = callbackFn(leaf);
+  if (!children) {
+    return [updatedLeaf];
+  }
+  return [updatedLeaf, children.map((child) => map(callbackFn, child))];
+};
+
+const makeAssociations = (uniqueTree, tree) => {
+  const uniqueLeafs = _.flattenDeep(uniqueTree);
+  const leafs = _.flattenDeep(tree);
+  return _.zipObject(uniqueLeafs, leafs);
+};
+
 export const sortTree = (tree) => {
-  const [root] = tree;
-  const joints = makeJoints(tree);
+  const uniqueTree = map(_.uniqueId, tree);
+  const associations = makeAssociations(uniqueTree, tree);
+  const [root] = uniqueTree;
+  const joints = makeJoints(uniqueTree);
   const sortedJoints = sortJoints(joints);
 
-  return buildTreeFromLeaf(sortedJoints, root);
+  const sorted = buildTreeFromLeaf(sortedJoints, root);
+  return map((leaf) => associations[leaf], sorted);
 };
