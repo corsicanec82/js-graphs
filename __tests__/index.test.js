@@ -1,3 +1,5 @@
+// @ts-check
+
 import {
   makeJoints, buildTreeFromLeaf, sortJoints, sortTree,
 } from '../src';
