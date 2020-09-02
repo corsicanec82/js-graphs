@@ -2,7 +2,7 @@
 
 import {
   makeJoints, buildTreeFromLeaf, sortJoints, sortTree,
-} from '../src';
+} from '../index.js';
 
 describe('Joints', () => {
   const tree = ['A', [
